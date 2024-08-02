@@ -1,0 +1,9 @@
+<h1><?= $this->form->get('id')->getValue() ? 'Edit User' : 'Add User' ?></h1>
+<form method="post" action="<?= $this->url() ?>">
+    <?= $this->form()->openTag($form) ?>
+    <?= $this->formRow($form->get('name')) ?>
+    <?= $this->formRow($form->get('email')) ?>
+    <?= $this->formRow($form->get('password')) ?>
+    <?= $this->formSubmit($form->get('submit')) ?>
+    <?= $this->form()->closeTag() ?>
+</form>

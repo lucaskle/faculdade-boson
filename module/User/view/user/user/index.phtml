@@ -1,0 +1,19 @@
+<h1>User List</h1>
+<a href="<?= $this->url('user', ['action' => 'add']) ?>">Add User</a>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    <?php foreach ($users as $user): ?>
+        <tr>
+            <td><?= $user->getName() ?></td>
+            <td><?= $user->getEmail() ?></td>
+            <td>
+                <a href="<?= $this->url('user', ['action' => 'edit', 'id' => $user->getId()]) ?>">Edit</a>
+                <a href="<?= $this->url('user', ['action' => 'delete', 'id' => $user->getId()]) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
