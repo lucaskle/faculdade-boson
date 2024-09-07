@@ -1,4 +1,4 @@
-name: laminas-chatgpt
+name: faculdadeBoson
 recipe: lamp
 config:
   webroot: public
@@ -6,10 +6,89 @@ config:
   xdebug: true
   conf:
     php: .lando/php.ini
+ 
+services:
+  # appserver:
+  #   type: php:8.0
+  #   composer_version: '1.10.12'
+  database:
+    type: mariadb:10.6.12
+    portforward: 3600
+    creds:
+      database: faculdadeBoson
+  node:
+    type: node
+    build:
+      # - yarn install
+      - gulp
+    globals:
+      gulp-cli: latest
+    ssl: true
+    command: cd /app && node_modules/.bin/gulp watch
+
+  pma:
+    type: phpmyadmin
+    hosts:
+      - database
+    # overrides:
+    #   environment:
+    #     PMA_HOST: database
+    #     PMA_USER: lamp
+    #     PMA_PASSWORD: lamp
+
+tooling:
+  doctrine:
+    service: appserver
+    description: Runs doctrine console commands.
+    cmd:
+      - vendor/bin/doctrine-module
+
+  laminas:
+    service: appserver
+    description: Runs laminas console commands.
+    cmd:
+      - vendor/bin/laminas
+
+  template-generate:
+    service: appserver
+    description: Runs laminas template-generate console commands.
+    cmd:
+      - vendor/bin/templatemap_generator.php
+
+  dump-server:
+    service: appserver
+    description: Runs var-dump-server console commands.
+    cmd:
+      - vendor/bin/var-dump-server
+
+  # zf:
+  #   service: appserver
+  #   description: ZFTools console commands.
+  #   cmd:
+  #     - vendor/bin/zf.php
+  npm:
+    service: node
+  node:
+    service: node
+  gulp:
+    service: node
+  yarn:
+    service: node
+
+#   node:
+#     type: node:12
+#     build_as_root:
+#       - apt-get update -y
+#       - apt-get install ruby-full -y
+#       - gem install compass
+
 
 proxy:
   appserver:
-    - laminas-chatgpt.lndo.site/
+    - faculdadeBoson.lndo.site/
   pma:
-    - pma.laminas-chatgpt.lndo.site/
- # database:
+    - pma.faculdadeBoson.lndo.site/
+  database:
+    - mysql.faculdadeBoson.lndo.site/
+  node:
+    - bs.faculdadeBoson.lndo.site:3000

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace User\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -27,15 +28,24 @@ class UserController extends AbstractActionController
         $form = new UserForm();
 
         $request = $this->getRequest();
+
+
         if ($request->isPost()) {
+
+
             $user = new User();
+
             $form->setData($request->getPost());
+
 
             if ($form->isValid()) {
                 $data = $form->getData();
                 $user->setName($data['name']);
                 $user->setEmail($data['email']);
                 $user->setPassword($data['password']);
+
+
+
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
@@ -47,29 +57,46 @@ class UserController extends AbstractActionController
     }
 
     public function editAction()
-    {
+    {   
+        
         $id = (int) $this->params()->fromRoute('id', 0);
+       
+        if (!$id) {
+            $id = (int) $this->getRequest()->getPost('id', 0);
+        }
+
         if (!$id) {
             return $this->redirect()->toRoute('user', ['action' => 'add']);
         }
 
         $user = $this->entityManager->find(User::class, $id);
+   
+
         if (!$user) {
             return $this->redirect()->toRoute('user');
         }
 
         $form = new UserForm();
+
         $form->bind($user);
+
         $form->get('submit')->setAttribute('value', 'Edit');
 
         $request = $this->getRequest();
+    
         if ($request->isPost()) {
+
+            
             $form->setData($request->getPost());
+           
 
             if ($form->isValid()) {
+
                 $this->entityManager->flush();
 
                 return $this->redirect()->toRoute('user');
+            }else{
+                dd($form->getMessages()); 
             }
         }
 
