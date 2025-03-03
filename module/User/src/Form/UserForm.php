@@ -26,6 +26,11 @@ class UserForm extends Form
             'options' => [
                 'label' => 'Name',
             ],
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'nome',
+               
+            ],
         ]);
 
         $this->add([
@@ -41,9 +46,7 @@ class UserForm extends Form
             'type' => Element\Email::class,
             'options' => [
                 'label' => 'Email address',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                
             ],
             'attributes' => [
                 'class' => 'form-control',
@@ -58,6 +61,11 @@ class UserForm extends Form
             'options' => [
                 'label' => 'Password',
             ],
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'password ',
+                'aria-describedby' => 'password',
+            ],
         ]);
 
         $this->add([
@@ -66,6 +74,7 @@ class UserForm extends Form
             'attributes' => [
                 'value' => 'Submit',
                 'id'    => 'submitbutton',
+                'class' => 'btn btn-primary',
             ],
         ]);
     }
