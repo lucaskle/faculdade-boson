@@ -21,4 +21,5 @@ return [
     'DoctrineORMModule',
     'Application',
     'User',
+    'Aluno',
 ];
