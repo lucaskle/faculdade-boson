@@ -32,6 +32,10 @@ return [
                 );
             },
         ],
+
+        // 'invokables' => [
+        //     'Aluno\Controller\AlunoController' => AlunoController::class
+        // ],
     ],
     'view_manager' => [
         'template_map' => [

@@ -5,7 +5,7 @@ namespace User\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Doctrine\ORM\EntityManager;
-use User\Entity\User;
+use Application\Entity\User;
 use User\Form\UserForm;
 
 class UserController extends AbstractActionController
