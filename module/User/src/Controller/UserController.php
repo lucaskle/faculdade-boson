@@ -44,8 +44,6 @@ class UserController extends AbstractActionController
                 $user->setEmail($data['email']);
                 $user->setPassword($data['password']);
 
-
-
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
@@ -53,14 +51,16 @@ class UserController extends AbstractActionController
             }
         }
 
-        return new ViewModel(['form' => $form]);
+        return (new ViewModel([
+            'form' => $form,
+        ]))->setTemplate('user/user/form');
     }
 
     public function editAction()
-    {   
-        
+    {
+
         $id = (int) $this->params()->fromRoute('id', 0);
-       
+
         if (!$id) {
             $id = (int) $this->getRequest()->getPost('id', 0);
         }
@@ -70,7 +70,7 @@ class UserController extends AbstractActionController
         }
 
         $user = $this->entityManager->find(User::class, $id);
-   
+
 
         if (!$user) {
             return $this->redirect()->toRoute('user');
@@ -83,27 +83,27 @@ class UserController extends AbstractActionController
         $form->get('submit')->setAttribute('value', 'Edit');
 
         $request = $this->getRequest();
-    
+
         if ($request->isPost()) {
 
-            
+
             $form->setData($request->getPost());
-           
+
 
             if ($form->isValid()) {
 
                 $this->entityManager->flush();
 
                 return $this->redirect()->toRoute('user');
-            }else{
-                dd($form->getMessages()); 
+            } else {
+                dd($form->getMessages());
             }
         }
 
-        return new ViewModel([
+        return (new ViewModel([
             'id' => $id,
             'form' => $form,
-        ]);
+        ]))->setTemplate('user/user/form');
     }
 
     public function deleteAction()

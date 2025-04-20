@@ -1,0 +1,29 @@
+<?php
+$action = $this->form->get('id')->getValue()
+    ? $this->url('user', ['action' => 'edit', 'id' => $this->form->get('id')->getValue()])
+    : $this->url('user', ['action' => 'add']);
+?>
+<h2 class="h2"><?= $this->form->get('id')->getValue() ? 'Editar Usuário' : 'Add User' ?></h2>
+<form action="<?= $action ?>" method="post">
+
+    <form method="post" action="<?= $action ?>">
+        <?= $this->form()->openTag($form) ?>
+        <?= $this->formRow($form->get('id')) ?>
+
+        <div class="d-flex justify-content-between">
+            <div class="col-6 me-1">
+                <?= $this->formRow($form->get('name')) ?>
+            </div>
+            <div class="col-6 ms-1">
+                <?= $this->formRow($form->get('email')) ?>
+            </div>
+        </div>
+        <div class="col-6 me-1">
+            <?= $this->formRow($form->get('password')) ?>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <?= $this->formSubmit($form->get('submit')) ?>
+        </div>
+        <?= $this->form()->closeTag() ?>
+    </form>
