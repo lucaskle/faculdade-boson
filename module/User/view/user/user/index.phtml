@@ -1,8 +1,10 @@
-<h1>User List</h1>
-<a href="<?= $this->url('user', ['action' => 'add']) ?>">Add User</a>
-<table class="table">
+<div class="d-flex justify-content-between mt-1">
+    <h2 class="h2">Usuários</h2>
+    <a class="btn btn-primary" href="<?= $this->url('user', ['action' => 'add']) ?>">Add User</a>
+</div>
+<table class="table table-bordered mt-1">
     <tr>
-        <th>Name</th>
+        <th>Nome</th>
         <th>Email</th>
         <th>Actions</th>
     </tr>
@@ -11,8 +13,8 @@
             <td><?= $user->getName() ?></td>
             <td><?= $user->getEmail() ?></td>
             <td>
-                <a href="<?= $this->url('user', ['action' => 'edit', 'id' => $user->getId()]) ?>">Edit</a>
-                <a href="<?= $this->url('user', ['action' => 'delete', 'id' => $user->getId()]) ?>">Delete</a>
+                <a  class="btn btn-outline-primary btn-sm" href="<?= $this->url('user', ['action' => 'edit', 'id' => $user->getId()]) ?>">Edit</a>
+                <a class="btn btn-outline-danger btn-sm" href="<?= $this->url('user', ['action' => 'delete', 'id' => $user->getId()]) ?>">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
