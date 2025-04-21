@@ -36,7 +36,8 @@
         "psr-4": {
             "Application\\": "module/Application/src/",
             "User\\": "module/User/src/",
-            "Aluno\\": "module/Aluno/src/"
+            "Aluno\\": "module/Aluno/src/",
+            "Secretaria\\": "module/Secretaria/src/"
         }
     },
     "autoload-dev": {
